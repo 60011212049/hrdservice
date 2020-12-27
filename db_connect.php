@@ -15,7 +15,7 @@ use \Medoo\Medoo;
 
 $dbconn = new Medoo([
     'database_type' => 'mysql',
-	'database_name' => 'hdr',
+	'database_name' => 'hrd',
 	'server' => 'localhost',
 	'username' => 'root',
 	'password' => '',
