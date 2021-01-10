@@ -10,6 +10,10 @@ require 'vendor/autoload.php';
 $app = new \Slim\App;
 
 require 'api/material.php';
+require 'api/pay_order.php';
+require 'api/report.php';
+require 'api/login.php';
+require 'api/employee.php';
 // require 'connectDB.php';
 require 'db_connect.php';
 
