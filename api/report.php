@@ -13,23 +13,41 @@ $app->get('/report/{id}', function (Request $request, Response $response, array 
         ->withStatus(200);
 });
 
-// $app->get('/material_type', function (Request $request, Response $response, array $args) {
-//     $database = $GLOBALS['dbconn'];
-//     $result = $database->select('se_material_type', '*', []);
+$app->get('/reportTest', function (Request $request, Response $response, array $args) {
+    $database = $GLOBALS['dbconn'];
+    $paramId = $args['id'];
+    $result = $database->select('se_pay_order', [
+        "[<]se_withdrawal" => ["po_id" => "po_id"],
+        "[<]se_material" => ["se_withdrawal.mate_id" => "mate_id"]
+    ], [
+        "se_pay_order.po_id",
+        "se_material.mate_name"
+    ],[
+        "se_pay_order.empno" => intval($paramId),
+        ]);
 
-//     $response->getBody()->write(json_encode($result));
-//     return $response->withHeader('Content-Type', 'application/json')
-//         ->withStatus(200);
-// });
+    $response->getBody()->write(json_encode($result));
+    return $response->withHeader('Content-Type', 'application/json')
+        ->withStatus(200);
+});
 
-// $app->get('/order_select', function (Request $request, Response $response, array $args) {
-//     $database = $GLOBALS['dbconn'];
-//     $result = $database->select('se_order', '*', []);
+$app->get('/report_mate/{id}', function (Request $request, Response $response, array $args) {
+    $database = $GLOBALS['dbconn'];
+    $paramId = $args['id'];
+    $result = $database->select('se_withdrawal', [
+        "[<]se_material" => ["se_withdrawal.mate_id" => "mate_id"]
+    ], [
+        "se_withdrawal.po_id",
+        "se_material.mate_name",
+        "se_withdrawal.amount",
+    ],[
+        "se_withdrawal.po_id" => intval($paramId),
+        ]);
 
-//     $response->getBody()->write(json_encode($result));
-//     return $response->withHeader('Content-Type', 'application/json')
-//         ->withStatus(200);
-// });
+    $response->getBody()->write(json_encode($result));
+    return $response->withHeader('Content-Type', 'application/json')
+        ->withStatus(200);
+});
 
 // $app->get ('/order',function (request $result , Response $response , array $args){
 //     $database = $GLOBALS['dbcon'];

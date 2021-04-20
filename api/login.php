@@ -42,7 +42,7 @@ $app->get('/loginId/{id}', function (Request $request, Response $response,  arra
     $database = $GLOBALS['dbconn'];
 
     $result = $database->select("member", '*', [
-        "UserID" => intval($paramId),
+        "Name" => intval($paramId),
     ]);
     if (count($result) == 1) {
         $response->getBody()->write(json_encode($result));

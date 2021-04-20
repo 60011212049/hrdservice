@@ -14,6 +14,7 @@ require 'api/pay_order.php';
 require 'api/report.php';
 require 'api/login.php';
 require 'api/employee.php';
+require 'api/department.php';
 // require 'connectDB.php';
 require 'db_connect.php';
 
